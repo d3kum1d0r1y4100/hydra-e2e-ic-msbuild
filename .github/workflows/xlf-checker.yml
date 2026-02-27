@@ -1,0 +1,25 @@
+name: XLF Checker
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  check-xlf:
+    if: contains(github.event.comment.body, '/run-xlf-check')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+      - name: Build and check XLF
+        run: |
+          dotnet build
+          dotnet run --project tools/xlf-check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
