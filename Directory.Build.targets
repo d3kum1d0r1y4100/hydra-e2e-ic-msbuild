@@ -1,0 +1,5 @@
+<Project>
+  <Target Name="PreBuild" BeforeTargets="Build">
+    <Exec Command="echo build" />
+  </Target>
+</Project>
